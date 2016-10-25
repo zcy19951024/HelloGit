@@ -9,101 +9,115 @@ namespace Bedrock_WeCath_WeiXin.Models
     public class EmployeeInfo
     {
         /// <summary>
-        /// Id
+        /// 表ID
         /// </summary>		
         //
         [Key]
        // private int _id;
         public int Id { get; set; }
         /// <summary>
-        /// Jobnumber
+        /// 员工编号
         /// </summary>		
         [MaxLength(50)]
         public string Jobnumber { get; set; }
         /// <summary>
-        /// CName
+        /// 姓名
         /// </summary>		
         //
         [MaxLength(50)]
         public string CName { get; set; }
         /// <summary>
-        /// EName
+        /// 英文名
         /// </summary>		
         [MaxLength(50)]
         public string EName { get; set; }
         /// <summary>
-        /// Sex
+        ///性别
         /// </summary>		
-        public int? Sex { get; set; }
+        [MaxLength(50)]
+        public string Sex { get; set; }
         /// <summary>
-        /// Birthday
+        /// 身份证号
+        /// </summary>		
+        public string IDcare { get; set; }
+        /// <summary>
+        /// 生日
         /// </summary>		
         public DateTime? Birthday { get; set; }
         /// <summary>
-        /// Address
+        /// 身份证地址
         /// </summary>		
        
         [MaxLength(500)]
-        public string Address { get; set; }
+        public string CareAddress { get; set; }
         /// <summary>
-        /// Phone
+        /// 现居住地址
+        /// </summary>		
+
+        [MaxLength(500)]
+        public string NowAddress { get; set; }
+        /// <summary>
+        /// 手机号
         /// </summary>		
         [MaxLength(50)]
         public string Phone { get; set; }
         /// <summary>
-        /// Position
+        /// 婚姻状况
+        /// </summary>		
+        public string MaritalStatus { get; set; }
+        /// <summary>
+        /// 最终学历
+        /// </summary>		
+        public string Education { get; set; }
+        /// <summary>
+        /// 职位
         /// </summary>	
         [MaxLength(50)]
         public string Position { get; set; }
         /// <summary>
-        /// Department
+        /// 部门
         /// </summary>		
         [MaxLength(50)]
         public string Department { get; set; }
-        /// <summary>
-        /// WorkState
-        /// </summary>		
-        public int? WorkState { get; set; }
-        /// <summary>
-        /// Email
-        /// </summary>		
-        [MaxLength(200)]
-        public string Email { get; set; }
-        /// <summary>
-        /// ApplyStartTime
-        /// </summary>		
-        public DateTime? ApplyStartTime { get; set; }
-        /// <summary>
-        /// ApplyEndTime
-        /// </summary>		
-        public DateTime? ApplyEndTime { get; set; }
-        /// <summary>
-        /// ProbationStartTime
-        /// </summary>		
-        public DateTime? ProbationStartTime { get; set; }
 
         /// <summary>
-        /// ProbationEndTime
+        /// 入职日期
         /// </summary>		
+        public DateTime? EntryStartTime { get; set; }
+
+        /// <summary>
+        /// 合同开始日期
+        /// </summary>		
+        public DateTime? ContractStartTime { get; set; }
+        /// <summary>
+        /// 合同到期日期
+        /// </summary>		
+        public DateTime? ContractEndTime { get; set; }
+        /// <summary>
+        /// 试用期到期日期
+        /// </summary>
         public DateTime? ProbationEndTime { get; set; }
-
         /// <summary>
-        /// Password
-        /// </summary>	
-               [MaxLength(50)]
-        public string Password { get; set; }
-
+        /// 试用期工资
+        /// </summary>
+        public string Probationsalary{get;set;}
         /// <summary>
-        /// WeChatCode
-        /// </summary>		
-        [MaxLength(50)]
-        public string WeChatCode { get; set; }
-
+        /// 合同工资
+        /// </summary>
+        public string Contractsalary { get; set; }
         /// <summary>
-        /// PM
+        /// 项目经理
         /// </summary>		
         [MaxLength(50)]
         public string PM { get; set; }
-
+        /// <summary>
+        /// 就职状态
+        /// </summary>		
+        public string WorkState { get; set; }
+        /// <summary>
+        /// 微信号
+        /// </summary>		
+        [MaxLength(50)]
+        public string WeChatCode { get; set; }
     }
 }

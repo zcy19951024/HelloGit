@@ -15,22 +15,37 @@ namespace Bedrock_WeCath_WeiXin.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// AD
+        /// AD账号
         /// </summary>		
         [MaxLength(50)]
         public string AD { get; set; }
-
         /// <summary>
-        /// Jobnumber
+        /// AD密码
+        /// </summary>		
+        [MaxLength(50)]
+        public string ADPwd { get; set; }
+        /// <summary>
+        /// 邮箱
+        /// </summary>		
+        [MaxLength(200)]
+        public string Email { get; set; }
+        /// <summary>
+        /// 邮箱密码
+        /// </summary>	
+        [MaxLength(50)]
+        public string Password { get; set; }
+        /// <summary>
+        /// 员工编号
         /// </summary>		
         [MaxLength(50)]
         public string Jobnumber { get; set; }
 
         /// <summary>
-        /// ADPwd
-        /// </summary>		
-        [MaxLength(50)]
-        public string ADPwd { get; set; }
+        /// 备注/描述
+        /// </summary>
+         [MaxLength(500)]
+        public string Desc { get; set; }
+             
 
     }
 }

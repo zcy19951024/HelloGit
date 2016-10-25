@@ -13,7 +13,7 @@ namespace Bedrock_WeCath_WeiXin
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));

@@ -252,8 +252,8 @@
     <Compile Include="Context\HomeContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseContentController.cs" />
-    <Compile Include="Controllers\EmployeeInfoController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\StudyCourseController.cs" />
     <Compile Include="Controllers\StudyDetailController.cs" />
     <Compile Include="Controllers\UpdateStudyController.cs" />
@@ -297,7 +297,6 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CourseContent.cs" />
     <Compile Include="Models\EmployeeInfo.cs" />
-    <Compile Include="Models\EmployeeInfoRepository.cs" />
     <Compile Include="Models\Interface1.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\RelatedCourses.cs" />
