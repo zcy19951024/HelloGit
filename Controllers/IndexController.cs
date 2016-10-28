@@ -23,6 +23,13 @@ namespace Bedrock_WeCath_WeiXin.Controllers
 
         public IEnumerable<ApprovalInfo> GetSel(string jobnumber)
         {
+            /*var app = db.ApprovalInfo.Where(a=>a.Jobnumber== jobnumber);
+            ApprovalInfo apps = new ApprovalInfo();
+            foreach (var itema in app)
+            {
+               itema.Status = apps.Status;
+               itema.AccountStatus = apps.AccountStatuss;
+            }*/
             var app = from a in db.ApprovalInfo where (a.Jobnumber == jobnumber) select a;
             return app;
         }

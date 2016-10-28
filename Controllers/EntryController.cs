@@ -14,7 +14,7 @@ namespace Bedrock_WeCath_WeiXin.Controllers
         // GET: api/Entry
         HomeContext db = new HomeContext();
 
-        // POST: api/Entry  入职
+        // POST: api/Entry  员工入职
         public ApprovalInfo PostEntry([FromBody]EmployeeInfo emp)
         {
             db.EmployeeInfo.Add(emp);
@@ -26,11 +26,40 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             app.EmpTime = DateTime.Now;//入职申请提交的时间
             app.Jobnumber = emp.Jobnumber;//员工编号
             app.Status = "HR待审核";
-            app.HrFilo = DateTime.Now.ToString("yyyyMMddHHmmss")+empId.Id;//生成单号
+            app.HrFilo = DateTime.Now.ToString("yyyyMMddHHmmss")+empId.Id;//生成单号PostResuleEntry
             db.ApprovalInfo.Add(app);
             db.SaveChanges();
             return app;
         }
+        //员工入职重新提交
+        public IEnumerable<ApprovalInfo> PostResuleEntry(string jobnumber,[FromBody]EmployeeInfo emp)
+        {
+            var emps = db.EmployeeInfo.Where(e=>e.Jobnumber==jobnumber);
+            foreach (var item in emps)
+            {
+                item.CName = emp.CName;
+                item.EName = emp.EName;
+                item.Sex = emp.Sex;
+                item.IDcare = emp.IDcare;
+                item.CareAddress = emp.CareAddress;
+                item.NowAddress = emp.NowAddress;
+                item.MaritalStatus = emp.MaritalStatus;
+                item.Education = emp.Education;
+                item.Phone = emp.Phone;
+            }
+            db.SaveChanges();
+            var app = db.ApprovalInfo.Where(a=>a.Jobnumber==jobnumber);
+            foreach (var items in app)
+            {
+                items.Status = "HR待审核";
+                items.EmpTime = DateTime.Now;
+            }
+            db.SaveChanges();
+            return app;
+        }
+
+
+
         /// <summary>
         /// 一开始就加载进HR审批页面的入职信息   http://192.168.0.122/BedrockAPI/api/Entry/PostHrApprovel
         /// </summary>
@@ -43,37 +72,26 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             return emp;
         }
         /// <summary>
-        /// HR审核    http://192.168.0.122/BedrockAPI/api/Entry/PostHrEntry?=jobnumber
+        /// HR审核通过    http://192.168.0.122/BedrockAPI/api/Entry/PostHrEntry?=jobnumber
         /// </summary>
         /// <param name="filo"></param>
         /// <param name="emp"></param>
         /// <returns></returns>
-        //[HttpGet]
-        public EmployeeInfo PostHrEntry(string jobnumber,EmployeeInfo emp)
+        [HttpPost]
+        public EmployeeInfo PostHrEntry(string jobnumber, [FromBody]EmployeeInfo emp)
         {
             var emem = from s in db.EmployeeInfo where s.Jobnumber == jobnumber select s;
             foreach (var item in emem)
             {
-                emp.CName = item.CName;//姓名
-                emp.EName = item.EName;//英文名
-                emp.Sex = item.Sex;//性别
-                emp.Jobnumber = item.Jobnumber;//员工编号
-                emp.IDcare = item.IDcare;// 身份证号
-                //emjob.Birthday = emp.Birthday;// 生日
-                emp.CareAddress = item.CareAddress;// 身份证地址
-                emp.NowAddress = item.NowAddress;// 现居住地址
-                emp.Phone = item.Phone;// 手机号
-                emp.MaritalStatus = item.MaritalStatus;// 婚姻状况
-                emp.Education = item.Education;// 最终学历
-                emp.Position = item.Position;// 职位
-                //emjob.Department = emp.Department;// 部门
-                emp.EntryStartTime = item.EntryStartTime;// 入职日期
-                emp.ContractStartTime = item.ContractStartTime;// 合同开始日期
-                emp.ContractEndTime = item.ContractEndTime;// 合同到期日期
-                emp.ProbationEndTime = item.ProbationEndTime;// 试用期到期日期
-                emp.Probationsalary = item.Probationsalary;// 试用期工资
-                emp.Contractsalary = item.Contractsalary;// 合同工资
-                emp.PM = item.PM;// 项目经理      
+                item.PositionEmp = emp.PositionEmp;// 职位
+                item.EntryStartTime = emp.EntryStartTime;// 入职日期
+                item.ContractStartTime = emp.ContractStartTime;// 合同开始日期
+                item.ContractEndTime = emp.ContractEndTime;// 合同到期日期
+                item.ProbationEndTime = emp.ProbationEndTime;// 试用期到期日期
+                item.Probationsalary = emp.Probationsalary;// 试用期工资
+                item.Contractsalary = emp.Contractsalary;// 合同工资
+                item.PM = emp.PM;// 项目经理  
+                item.hrcoment = emp.hrcoment;//备注
             }
             db.SaveChanges();
             var app = from a in db.ApprovalInfo where a.Jobnumber == jobnumber select a;
@@ -81,15 +99,39 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             {
                 items.HRApproverTime = DateTime.Now;
                 items.Status = "HR已审核";
+                items.coment = "审核通过";
             }
             db.SaveChanges();
-            /*ApprovalInfo app = new ApprovalInfo();
-            app.HRApproverTime = DateTime.Now;
-            app.Status = "已审核";*/
-
-
             return emp;
         }
+
+
+
+
+        
+        /// <summary>
+        /// HR审核退回    http://192.168.0.122/BedrockAPI/api/Entry/PostHrRetrun?=jobnumber
+        /// </summary>
+        /// <param name="filo"></param>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IEnumerable<ApprovalInfo> PostHrRetrun(string jobnumber,ApprovalInfo apps)
+        {
+            var app = from a in db.ApprovalInfo where a.Jobnumber == jobnumber select a;
+            foreach (var items in app)
+            {
+                items.HRApproverTime = DateTime.Now;
+                items.Status = "HR退回";
+                items.coment = apps.coment;                
+            }
+            db.SaveChanges();
+            return app;
+        }
+
+
+
+
 
         [HttpGet]//填了入职信息后一开始就加载 http://192.168.0.132/BedrockAPI/api/Entry/GetIndex?id=Bedrock2016102158
         public IEnumerable<object> GetIndex(string id)
@@ -148,8 +190,5 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             return temps;
 
         }
-        
-
-
     }
 }

@@ -18,6 +18,8 @@ namespace Bedrock_WeCath_WeiXin.Controllers
         {
             var studyDetail = context.StudyDetails.FirstOrDefault(x => x.CourseCode==CourseCode && x.Jobnumber ==Jobnumber);
 
+            studyDetail.CourseCode = context.StudyCourseIinfo.FirstOrDefault(x => x.CourseCode == studyDetail.CourseCode).CourseTitle;
+
             return studyDetail;
         }
 
@@ -56,53 +58,121 @@ namespace Bedrock_WeCath_WeiXin.Controllers
         // PUT: api/StudyDetail/5
         [HttpPost]
         public string Put(int id, [FromBody]StudyDetails StudDetail)
-        { 
-
+        {
+            var dt = DateTime.Now;
 
             StudyDetails StudDetails = context.StudyDetails.FirstOrDefault(x => x.CourseCode == StudDetail.CourseCode && x.Jobnumber == StudDetail.Jobnumber);
             //根据id判断学习状态并做相应处理
             switch (id)
             {
+
                 //开始学习
+                #region
                 case 1:
-                    StudDetails.StartStudyTime = DateTime.Now;
+                    StudDetails.StartStudyTime = dt;
                     StudDetails.Studystate = 2;
-                    StudDetails.ExpectFinishDate = DateTime.Now.AddDays(context.StudyCourseIinfo.FirstOrDefault(x=>x.CourseCode==StudDetails.CourseCode).CourseFinishTime);
+                    //StudDetails.ExpectFinishDate = dt.AddDays(context.StudyCourseIinfo.FirstOrDefault(x=>x.CourseCode==StudDetails.CourseCode).CourseFinishTime);
+                    double days = context.StudyCourseIinfo.FirstOrDefault(x => x.CourseCode == StudDetails.CourseCode).CourseFinishTime;
+                    StudDetails.ExpectFinishDate = dt;
+                    //循环用来排除总天数中的双休日    
+                    for (var i = 0; i < days; i++)
+                    {
+                        var tempdt = dt.Date.AddDays(i+1);
+                        if (tempdt.DayOfWeek == DayOfWeek.Saturday || tempdt.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            days++;
+                        }
+                        StudDetails.ExpectFinishDate = tempdt;
+                       
+                    }
+                  
                     break;
-                   //暂停
+                #endregion
+
+                //暂停
+                #region
                 case 2:
                     StudDetails.Studystate = 3;
                     StudDetails.isStop = false;
-                    StudDetails.StopStartTime = DateTime.Now;
-                   
+                    StudDetails.StopStartTime = dt;
                     StudDetails.StopReason = StudDetail.StopReason;
                     break;
-                    //延后
+                #endregion
+                //申请延后
+                #region
                 case 3:
-                   
+
                     StudDetails.isDefer = false;
-                    StudDetails.ExpectFinishDate = Convert.ToDateTime(StudDetails.ExpectFinishDate).AddDays(Convert.ToDouble(StudDetail.DeferTime));
+                    StudDetails.DeferTime = StudDetail.DeferTime;
                     StudDetails.DeferReason = StudDetail.DeferReason;
                     break;
-                    //完成学习
+                #endregion
+                //完成学习
+                #region
                 case 4:
                     StudDetails.Studystate = 4;
-                    StudDetails.FinishStudyTime = DateTime.Now;
+                    StudDetails.FinishStudyTime = dt;
                     break;
-                    //取消暂停
+                #endregion
+                //取消暂停
+                #region
                 case 5:
                     StudDetails.Studystate = 2;
-                    StudDetails.StopEndTime = StudDetail.StopEndTime;
-                    TimeSpan day = DateTime.Now - Convert.ToDateTime(StudDetails.StopStartTime);
-                    StudDetails.ExpectFinishDate = Convert.ToDateTime(StudDetails.ExpectFinishDate).AddDays(day.Days);
+                    StudDetails.StopEndTime = dt;
+                    var fromTime = Convert.ToDateTime(StudDetails.StopStartTime);
+                    TimeSpan ts = dt.Subtract(fromTime);
+                    //获取两个日期间的总天数    
+                    long countday = ts.Days;
+                    //工作日  
+                    long weekday = 0;
+                    //循环用来扣除总天数中的双休日    
+                    for (var i = 0; i < countday; i++)
+                    {
+                        var tempdt = fromTime.Date.AddDays(i + 1);
+                        if (tempdt.DayOfWeek != DayOfWeek.Saturday && tempdt.DayOfWeek != DayOfWeek.Sunday)
+                        {
+                            weekday++;
+                        }
+                    }
+                    //通过暂停的天数重新计算预期完成时间
+                    var startdate = Convert.ToDateTime(StudDetails.ExpectFinishDate);
+                    for (int i = 0; i < weekday; i++)
+                    {
+                        var tempdt = startdate.Date.AddDays(i + 1);
+                        if (tempdt.DayOfWeek == DayOfWeek.Saturday || tempdt.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            weekday++;
+
+                        }
+                        StudDetails.ExpectFinishDate = tempdt;
+
+                    }
                     break;
-                    //取消延后
-                //case 6:
-                //    StudDetails.StudyDate = 1;
-                //    break;
+                    #endregion
+                    //确认延后
+                    case 6:
+                    var day = StudDetails.DeferTime;
+                    var startime = Convert.ToDateTime(StudDetails.ExpectFinishDate);
+                    for (int i = 0; i < day; i++)
+                    {
+                        var tempdt = startime.Date.AddDays(i + 1);
+                        if (tempdt.DayOfWeek == DayOfWeek.Saturday || tempdt.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            day++;
+
+                        }
+                        StudDetails.ExpectFinishDate = tempdt;
+
+                    }
+                    break;
+                //取消延后
+                 //case 7:
+                 //   StudDetails.DeferTime =  null;
+                 //   StudDetails.DeferReason = null;
+                 //   break;
             }
-                
-          
+
+
             context.SaveChanges();
 
             return "OK!";

@@ -254,6 +254,7 @@
     <Compile Include="Controllers\CourseContentController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\StudyCourseController.cs" />
     <Compile Include="Controllers\StudyDetailController.cs" />
     <Compile Include="Controllers\UpdateStudyController.cs" />
@@ -292,6 +293,10 @@
     <Compile Include="Migrations\201610210643285_ModifyStudyDetails.Designer.cs">
       <DependentUpon>201610210643285_ModifyStudyDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610260545416_InitialCreate-v1.cs" />
+    <Compile Include="Migrations\201610260545416_InitialCreate-v1.Designer.cs">
+      <DependentUpon>201610260545416_InitialCreate-v1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalInfo.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -299,6 +304,7 @@
     <Compile Include="Models\EmployeeInfo.cs" />
     <Compile Include="Models\Interface1.cs" />
     <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\RelatedCourses.cs" />
     <Compile Include="Models\StateType.cs" />
     <Compile Include="Models\StudyCourseIinfo.cs" />
@@ -335,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610210643285_ModifyStudyDetails.resx">
       <DependentUpon>201610210643285_ModifyStudyDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610260545416_InitialCreate-v1.resx">
+      <DependentUpon>201610260545416_InitialCreate-v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

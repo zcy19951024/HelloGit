@@ -73,7 +73,7 @@ namespace Bedrock_WeCath_WeiXin.Models
         /// 职位
         /// </summary>	
         [MaxLength(50)]
-        public string Position { get; set; }
+        public string PositionEmp { get; set; }
         /// <summary>
         /// 部门
         /// </summary>		
@@ -111,9 +111,14 @@ namespace Bedrock_WeCath_WeiXin.Models
         [MaxLength(50)]
         public string PM { get; set; }
         /// <summary>
+        /// 备注
+        /// </summary>		
+        public string hrcoment { get; set; }
+        /// <summary>
         /// 就职状态
         /// </summary>		
         public string WorkState { get; set; }
+
         /// <summary>
         /// 微信号
         /// </summary>		

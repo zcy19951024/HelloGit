@@ -23,6 +23,8 @@ namespace Bedrock_WeCath_WeiXin.Context
         public DbSet<StudyCourseIinfo> StudyCourseIinfo { get; set; }
         public DbSet<StudyDetails> StudyDetails { get; set; }
         public DbSet<UserAD> UserAD { get; set; }
+
+        public DbSet<Project> Project { get; set; }
         public DbSet<WordTime> WordTime { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

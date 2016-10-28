@@ -64,6 +64,31 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             db.SaveChanges();
             return user;
         }
+        [HttpPost]//账户重新申请
+        public UserAD PostAccountRetrun(string jobnumber, [FromBody]UserAD user)
+        {
+            /*user.Jobnumber = jobnumber;
+            db.UserAD.Add(user);
+            db.SaveChanges();*/
+            var users = db.UserAD.Where(u=>u.Jobnumber==jobnumber);
+            foreach (var items in users)
+            {
+                items.Password = user.Password; 
+            }
+            db.SaveChanges();
+            var APPAD = db.ApprovalInfo.Where(a => a.Jobnumber == jobnumber);
+            foreach (var item in APPAD)
+            {
+                //item.AccountFilo = DateTime.Now.ToString("yyyyMMddHHmmss") + user.Id;//生成单号
+                item.AccountTime = DateTime.Now;
+                item.AccountStatus = "AD待审核";
+            }
+            db.SaveChanges();
+            return user;
+        }
+
+
+
         [HttpGet]//AD审批一开始就将员工信息传入审核页面
         public IEnumerable<object> GetAccountApproval(string jobnumber)
         {
@@ -111,11 +136,26 @@ namespace Bedrock_WeCath_WeiXin.Controllers
             {
                 itemapp.AccountApproverTime = DateTime.Now;
                 itemapp.AccountStatus = "AD已审核";
-                //itemapp.AccountComent = app.AccountComent;
+                itemapp.AccountComent = "审核通过";
             }
             db.SaveChanges();
             return users;
         }
+        //退回
+        [HttpPost]
+        public IEnumerable<ApprovalInfo> PostADRetrun(string jobnumber,[FromBody]ApprovalInfo app)
+        {
+            var apps = db.ApprovalInfo.Where(a => a.Jobnumber == jobnumber);
+            foreach (var itemapp in apps)
+            {
+                itemapp.AccountApproverTime = DateTime.Now;
+                itemapp.AccountStatus = "AD退回";
+                itemapp.AccountComent = app.AccountComent;
+            }
+            db.SaveChanges();
+            return apps;
+        }
+
 
     }
 }

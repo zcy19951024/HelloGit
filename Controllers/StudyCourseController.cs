@@ -33,7 +33,7 @@ namespace Bedrock_WeCath_WeiXin.Controllers
         // GET: api/StudyCourse/5
         public IEnumerable<object> Get(int id,string Jobnumber)
         {
-            var StudyDetails = context.StudyDetails.Where(x => x.Jobnumber == Jobnumber).ToList();
+            var StudyDetails = context.StudyDetails.Where(x => x.Jobnumber == Jobnumber).OrderBy(x=>x.Studystate).ToList();
             List<object> CourseInfos = new List<object>();
             foreach (var item in StudyDetails)
             {
@@ -41,13 +41,16 @@ namespace Bedrock_WeCath_WeiXin.Controllers
                             where p.CourseCode == item.CourseCode
                             select new {
                                 CourseTitle = p.CourseTitle,
-                                CourseFinishTime = item.ExpectFinishDate.ToString().Substring(0,10),
+                                CourseFinishTime = item.ExpectFinishDate.ToString().Substring(0, 10),
                                 CourseCode = p.CourseCode,
                                 CoursePM = p.CoursePM,
                                 CoursePrincipal = p.CoursePrincipal,
-                                State =context.StateType.FirstOrDefault(x => x.Id == item.Studystate).TypeName 
-                                      
-                                  };
+                                State = context.StateType.FirstOrDefault(x => x.Id == item.Studystate).TypeName,
+                                studyState = item.Studystate,
+                                FinishTime = item.FinishStudyTime.ToString().Substring(0, 10),
+                                StopTime = item.StopStartTime.ToString().Substring(0, 10),
+                                startStudytime =item.StartStudyTime.ToString().Substring(0, 10)
+                            };
                 CourseInfos.Add(query);
             }
 
