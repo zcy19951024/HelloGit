@@ -258,6 +258,7 @@
     <Compile Include="Controllers\StudyCourseController.cs" />
     <Compile Include="Controllers\StudyDetailController.cs" />
     <Compile Include="Controllers\UpdateStudyController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WorkController.cs" />
     <Compile Include="DTOModels\DTO_ApprovalInfo.cs" />
     <Compile Include="DTOModels\DTO_Comment.cs" />
@@ -277,25 +278,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610210429411_v1.cs" />
-    <Compile Include="Migrations\201610210429411_v1.Designer.cs">
-      <DependentUpon>201610210429411_v1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610210600086_ModifyStudyCourseIinfo.cs" />
-    <Compile Include="Migrations\201610210600086_ModifyStudyCourseIinfo.Designer.cs">
-      <DependentUpon>201610210600086_ModifyStudyCourseIinfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610210603252_ModifyStudyCourseIinfo1.cs" />
-    <Compile Include="Migrations\201610210603252_ModifyStudyCourseIinfo1.Designer.cs">
-      <DependentUpon>201610210603252_ModifyStudyCourseIinfo1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610210643285_ModifyStudyDetails.cs" />
-    <Compile Include="Migrations\201610210643285_ModifyStudyDetails.Designer.cs">
-      <DependentUpon>201610210643285_ModifyStudyDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610260545416_InitialCreate-v1.cs" />
-    <Compile Include="Migrations\201610260545416_InitialCreate-v1.Designer.cs">
-      <DependentUpon>201610260545416_InitialCreate-v1.cs</DependentUpon>
+    <Compile Include="Migrations\201610310405415_v1.cs" />
+    <Compile Include="Migrations\201610310405415_v1.Designer.cs">
+      <DependentUpon>201610310405415_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalInfo.cs" />
@@ -330,20 +315,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610210429411_v1.resx">
-      <DependentUpon>201610210429411_v1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610210600086_ModifyStudyCourseIinfo.resx">
-      <DependentUpon>201610210600086_ModifyStudyCourseIinfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610210603252_ModifyStudyCourseIinfo1.resx">
-      <DependentUpon>201610210603252_ModifyStudyCourseIinfo1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610210643285_ModifyStudyDetails.resx">
-      <DependentUpon>201610210643285_ModifyStudyDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610260545416_InitialCreate-v1.resx">
-      <DependentUpon>201610260545416_InitialCreate-v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610310405415_v1.resx">
+      <DependentUpon>201610310405415_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

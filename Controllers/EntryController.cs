@@ -13,15 +13,15 @@ namespace Bedrock_WeCath_WeiXin.Controllers
     {
         // GET: api/Entry
         HomeContext db = new HomeContext();
-
+       
         // POST: api/Entry  员工入职
         public ApprovalInfo PostEntry([FromBody]EmployeeInfo emp)
         {
             db.EmployeeInfo.Add(emp);
             db.SaveChanges();
             EmployeeInfo empId = db.EmployeeInfo.Find(emp.Id);
-            empId.Jobnumber = "Bedrock" + DateTime.Now.ToString("yyyyMMdd") + empId.Id;
-            db.SaveChanges();
+            /* empId.Jobnumber = "Bedrock" + DateTime.Now.ToString("yyyyMMdd") + empId.Id;
+             db.SaveChanges();*/
             ApprovalInfo app = new ApprovalInfo();
             app.EmpTime = DateTime.Now;//入职申请提交的时间
             app.Jobnumber = emp.Jobnumber;//员工编号

@@ -172,7 +172,4 @@ D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.d
 D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.pdb
 D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.Migrations.v1.resources
 D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.csproj.GenerateResource.Cache
-D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.Migrations.ModifyStudyCourseIinfo.resources
-D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.Migrations.ModifyStudyCourseIinfo1.resources
-D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.Migrations.ModifyStudyDetails.resources
-D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.Migrations.InitialCreatev1.resources
+D:\Bedrock_WeCath_WeiXin\Bedrock_WeCath_WeiXin\obj\Debug\Bedrock_WeCath_WeiXin.csprojResolveAssemblyReference.cache

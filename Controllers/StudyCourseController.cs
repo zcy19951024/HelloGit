@@ -12,7 +12,7 @@ namespace Bedrock_WeCath_WeiXin.Controllers
     public class StudyCourseController : ApiController
     {
         HomeContext context = new HomeContext();
-
+        [HttpGet]
         // GET: api/StudyCourse
         public IEnumerable<StudyCourseIinfo> Get(string Jobnumber)
         {
@@ -29,7 +29,7 @@ namespace Bedrock_WeCath_WeiXin.Controllers
 
             return StudyCourses;
         }
-
+        [HttpGet]
         // GET: api/StudyCourse/5
         public IEnumerable<object> Get(int id,string Jobnumber)
         {

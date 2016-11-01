@@ -9,7 +9,7 @@ namespace Bedrock_WeCath_WeiXin.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Bedrock_WeCath_WeiXin.Context.HomeContext context)

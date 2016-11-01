@@ -10,7 +10,7 @@ namespace Bedrock_WeCath_WeiXin.Context
         public HomeContext()
         {
             //Database.SetInitializer(new DropCreateDatabaseAlways<ReimbursementContext>());
-            this.Database.Initialize(false);
+            //this.Database.Initialize(false);
         }
       
         public DbSet<Master> Master { get; set; }
